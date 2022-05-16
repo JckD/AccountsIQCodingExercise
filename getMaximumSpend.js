@@ -102,29 +102,48 @@ console.log(getMaximumSpend(listThree, listFour, budget6))
 
 */
 
-// let list = [listOne, listTwo]
+let list = [listOne, listTwo, listThree]
 
-// function getMaximumSpendLists(listOfArrays, budget) {
+/* 
+    getMaximumSpendLists([][], int)
 
-//     let maxSpend = 0
+    takes an array of arrays of item prices and gets the max spend but only from consecutive lists
+    cannot take items from lists that skip a list index e.g 1 item from list 1 and an item from list 3 skipping list 2
+*/
 
-//     for(let i=0; i < listOfArrays.length; i ++) {
-//         for(let j = 0; j< listOfArrays[i].length; j++) {
-//             for(let k =0; k < listOfArrays[i].length; k++) {
+function getMaximumSpendLists(listOfArrays, budget) {
 
-//                 // if ( ) {
-                
+    let maxSpend = 0
 
-//                 //    // console.log(maxSpend)
-//                 // } else if (maxSpend == 0 ) {
-//                 //     maxSpend = -1
-//                 // }
+    for(let i=0; i <= listOfArrays.length; i ++) {
+        let temp = i + 1
+                if (temp >= listOfArrays.length) {
+                    temp = 1
+                }
+        for(let j = 0; j <= listOfArrays[temp].length; j++) {
+            for(let k =0; k <= listOfArrays[temp].length; k++) {
 
-//             }
-//         }
-//     }
 
-//     return maxSpend
-// }
 
-//console.log(getMaximumSpendLists(list, budget1))
+                 if (listOfArrays[temp-1][j] + listOfArrays[temp][k] <= budget && listOfArrays[temp-1][j] + listOfArrays[temp][k] >= maxSpend) {
+
+                    maxSpend = listOfArrays[temp-1][j] + listOfArrays[temp][k]
+
+
+                   // console.log(maxSpend)
+                } else if (maxSpend == 0 ) {
+                    maxSpend = -1
+                }
+
+            }
+        }
+    }
+
+    return maxSpend
+}
+
+console.log(getMaximumSpendLists(list, budget2))
+
+console.log(getMaximumSpendLists(list, budget3))
+
+console.log(getMaximumSpendLists(list, budget4))
